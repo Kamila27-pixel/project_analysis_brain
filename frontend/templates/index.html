@@ -4,4 +4,38 @@
 
 {% block content %}
     <h2>Witaj w aplikacji do analizy skanów mózgu</h2>
+
+    <h3>Lekarze</h3>
+    <ul>
+        {% for doctor in doctors %}
+            <li>{{ doctor.user.username }} - Specjalizacja: {{ doctor.specialization }}</li>
+        {% empty %}
+            <li>Brak lekarzy w bazie.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Pacjenci</h3>
+    <ul>
+        {% for patient in patients %}
+            <li>{{ patient.user.username }} - Wiek: {{ patient.age }}</li>
+        {% empty %}
+            <li>Brak pacjentów w bazie.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Ostatnie skany mózgu</h3>
+    <ul>
+        {% for scan in scans %}
+            <li>Pacjent: {{ scan.patient.user.username }} - Status: {{ scan.status }}</li>
+        {% empty %}
+            <li>Brak skanów mózgu.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Akcje</h3>
+    <ul>
+        <li><a href="{% url 'register' %}">Rejestracja użytkownika</a></li>
+        <li><a href="{% url 'login' %}">Logowanie</a></li>
+        <li><a href="{% url 'api-root' %}">API aplikacji</a></li>
+    </ul>
 {% endblock %}
